@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students Management - Baralai High School</title>
+
+    <link rel="stylesheet" href="../assets/css/components.css" />
+    <link rel="stylesheet" href="../assets/css/students.css" />
+    <link rel="stylesheet" href="../assets/css/layout-clean.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  </head>
+
+  <body class="admin-page">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content" id="appBody">
+      <div id="admin-header-container"></div>
+
+      <div id="add-student" class="students-page-section">
+        <section class="add-student-toggle-card">
+          <div>
+            <h3>
+              <i class="fas fa-user-plus"></i>
+              Add New Student
+            </h3>
+            <p>Click the button to open the student registration form.</p>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="openAddStudentFormBtn"
+          >
+            <i class="fas fa-plus"></i>
+            Add Student
+          </button>
+        </section>
+
+        <section class="control-card">
+          <div id="classSelection">
+            <label for="classSelect" class="form-label">Select Class</label>
+            <select class="form-control" id="classSelect">
+              <option value="" selected>All Classes</option>
+              <option value="6">Class 6</option>
+              <option value="7">Class 7</option>
+              <option value="8">Class 8</option>
+              <option value="9">Class 9</option>
+              <option value="10">Class 10</option>
+            </select>
+          </div>
+        </section>
+
+        <section
+          id="addStudentForm"
+          class="student-form-card add-student-form-hidden"
+        >
+          <div class="student-form-title-row">
+            <h3>
+              <i class="fas fa-user-plus"></i>
+              Add Student
+            </h3>
+
+            <button
+              type="button"
+              class="student-form-close-btn"
+              id="hideAddStudentFormBtn"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <form id="studentForm">
+            <input type="hidden" id="studentId" />
+
+            <div class="student-form-grid">
+              <div>
+                <label for="studentName" class="form-label">Student Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="studentName"
+                  placeholder="Enter student name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="studentRoll" class="form-label">Student Roll</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="studentRoll"
+                  placeholder="Auto roll"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  required
+                />
+              </div>
+
+              <div
+                id="studentSectionGroup"
+                class="student-section-group"
+                style="display: none"
+              >
+                <label for="studentSection" class="form-label">Section</label>
+                <select class="form-control" id="studentSection">
+                  <option value="">Select Section</option>
+                  <option value="Science">Science</option>
+                  <option value="Arts">Arts</option>
+                  <option value="Commerce">Commerce</option>
+                </select>
+                <small class="section-help-text">
+                  Section is required for Class 9 and Class 10 only.
+                </small>
+              </div>
+
+              <div>
+                <label for="studentReligion" class="form-label">Religion</label>
+                <select class="form-control" id="studentReligion" required>
+                  <option value="Islam" selected>Islam</option>
+                  <option value="Hindu">Hindu</option>
+                </select>
+                <small class="section-help-text">
+                  Used to load the correct religion subject in results.
+                </small>
+              </div>
+
+              <div
+                id="studentOptionalSubjectGroup"
+                class="student-optional-subject-group"
+                style="display: none"
+              >
+                <label for="studentOptionalSubject" class="form-label"
+                  >Optional / 4th Subject</label
+                >
+                <select class="form-control" id="studentOptionalSubject">
+                  <option value="">No optional subject</option>
+                </select>
+                <small class="section-help-text">
+                  For Class 9/10 only. Result calculation will use only the
+                  selected optional subject.
+                </small>
+              </div>
+
+              <div>
+                <label for="guardianName" class="form-label"
+                  >Guardian Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="guardianName"
+                  placeholder="Enter guardian name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="phone" class="form-label">Phone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phone"
+                  placeholder="Enter phone number"
+                  required
+                />
+              </div>
+
+              <div class="full-width">
+                <label for="studentAddress" class="form-label">Address</label>
+                <textarea
+                  class="form-control"
+                  id="studentAddress"
+                  rows="3"
+                  placeholder="Enter student address"
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <div
+                id="ajaxStatus"
+                class="student-form-status"
+                role="status"
+                aria-live="polite"
+              ></div>
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+                id="submitStudentBtn"
+              >
+                Add Student
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-secondary"
+                id="cancelEditBtn"
+              >
+                Cancel Edit
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section id="studentList" class="student-list-card">
+          <div class="student-list-top">
+            <div class="list-header">
+              <div>
+                <h3>Current Students</h3>
+                <p id="listSubTitle">No class selected.</p>
+              </div>
+            </div>
+
+            <div class="student-toolbar">
+              <div
+                class="student-section-filter-box"
+                id="studentSectionFilterBox"
+                style="display: none"
+              >
+                <label for="studentSectionFilter" class="form-label"
+                  >Section</label
+                >
+                <select class="form-control" id="studentSectionFilter">
+                  <option value="">All Sections</option>
+                  <option value="Science">Science</option>
+                  <option value="Arts">Arts</option>
+                  <option value="Commerce">Commerce</option>
+                  <option value="General">Needs Group / General</option>
+                </select>
+              </div>
+
+              <div class="student-search-box">
+                <label for="studentSearch" class="form-label"
+                  >Search Student</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="studentSearch"
+                  placeholder="Search by name, roll, section or class"
+                />
+              </div>
+
+              <button class="btn btn-success btn-sm" id="refreshBtn">
+                <i class="fas fa-rotate-right"></i>
+                Refresh
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive students-list-table-wrap">
+            <table
+              class="table table-bordered align-middle students-list-table"
+            >
+              <colgroup>
+                <col class="student-col-serial" />
+                <col class="student-col-name" />
+                <col class="student-col-roll" />
+                <col class="student-col-class" />
+                <col class="student-col-section" />
+                <col class="student-col-religion" />
+                <col class="student-col-optional" />
+                <col class="student-col-actions" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Serial</th>
+                  <th>Name</th>
+                  <th>Roll</th>
+                  <th>Class</th>
+                  <th>Section</th>
+                  <th>Religion</th>
+                  <th>Optional</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="studentsTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="download-actions">
+            <button class="btn btn-info btn-sm" id="downloadPdfBtn">
+              <i class="fas fa-file-pdf"></i>
+              Download PDF
+            </button>
+
+            <button class="btn btn-success btn-sm" id="downloadExcelBtn">
+              <i class="fas fa-file-excel"></i>
+              Download Excel
+            </button>
+          </div>
+
+        </section>
+      </div>
+
+      <div id="promote-class" class="students-page-section">
+        <section class="promotion-card">
+          <div class="promotion-header">
+            <div>
+              <h3>
+                <i class="fas fa-level-up-alt"></i>
+                Class Promotion
+              </h3>
+              <p>
+                Promote students to the next class. For Class 9 and Class 10,
+                select a target section first, then choose students for that
+                section.
+              </p>
+            </div>
+
+            <span class="promotion-badge">Section Aware</span>
+          </div>
+
+          <div class="promotion-alert">
+            <i class="fas fa-info-circle"></i>
+            <span>
+              All students will be shown. For Class 9/10 promotion, choose
+              Science, Arts, or Commerce below first, then select students for
+              that section. Once a student is selected for one section, they
+              will not appear in other section views.
+            </span>
+          </div>
+
+          <div class="promotion-grid">
+            <div>
+              <label for="promotionFromYear" class="form-label"
+                >From Exam Year</label
+              >
+              <select class="form-control" id="promotionFromYear">
+                <option value="">Select Year</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="promotionFromClass" class="form-label"
+                >From Class</label
+              >
+              <select class="form-control" id="promotionFromClass">
+                <option value="">Select Class</option>
+                <option value="6">Class 6</option>
+                <option value="7">Class 7</option>
+                <option value="8">Class 8</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="promotionToYear" class="form-label"
+                >To Exam Year</label
+              >
+              <select class="form-control" id="promotionToYear">
+                <option value="">Select Year</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="promotionToClass" class="form-label">To Class</label>
+              <select class="form-control" id="promotionToClass">
+                <option value="">Select Class</option>
+                <option value="7">Class 7</option>
+                <option value="8">Class 8</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+              </select>
+            </div>
+          </div>
+
+          <div
+            class="promotion-target-section-box"
+            id="promotionTargetSectionBox"
+            style="display: none"
+          >
+            <div class="promotion-target-section-info">
+              <label for="promotionTargetSection" class="form-label"
+                >Target Section</label
+              >
+              <p>
+                Select a section, then tick students from the list. Selected
+                students will be assigned only to this section.
+              </p>
+            </div>
+
+            <div class="promotion-target-controls">
+              <div>
+                <label for="promotionTargetSection" class="form-label"
+                  >Target Section</label
+                >
+                <select class="form-control" id="promotionTargetSection">
+                  <option value="">Select Section</option>
+                  <option value="Science">Science</option>
+                  <option value="Arts">Arts</option>
+                  <option value="Commerce">Commerce</option>
+                </select>
+              </div>
+
+              <div id="promotionTargetOptionalBox" style="display: none">
+                <label for="promotionTargetOptionalSubject" class="form-label"
+                  >Optional / 4th Subject</label
+                >
+                <select
+                  class="form-control"
+                  id="promotionTargetOptionalSubject"
+                >
+                  <option value="">No optional subject</option>
+                </select>
+                <small class="section-help-text">
+                  This optional subject will be assigned to students selected in
+                  the current section.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="promotion-actions">
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="loadPromotionStudentsBtn"
+            >
+              <i class="fas fa-list"></i>
+              Load Students
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="resetPromotionBtn"
+            >
+              <i class="fas fa-rotate-left"></i>
+              Reset
+            </button>
+          </div>
+
+          <div id="promotionStatus" class="promotion-status"></div>
+        </section>
+
+        <section class="promotion-list-card" id="promotionListCard">
+          <div class="promotion-list-top">
+            <div>
+              <h3>Promotion Student List</h3>
+              <p id="promotionListSubTitle">
+                Select year and class, then load students.
+              </p>
+            </div>
+
+            <div class="promotion-selection-actions">
+              <button
+                type="button"
+                class="btn btn-info btn-sm"
+                id="selectEligibleStudentsBtn"
+              >
+                <i class="fas fa-check-square"></i>
+                Select Eligible
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-warning btn-sm"
+                id="unselectAllPromotionBtn"
+              >
+                <i class="fas fa-square"></i>
+                Unselect All
+              </button>
+            </div>
+          </div>
+
+          <div class="promotion-count-box">
+            <div>
+              <span>Total Found</span>
+              <strong id="promotionTotalCount">0</strong>
+            </div>
+
+            <div>
+              <span>Eligible</span>
+              <strong id="promotionEligibleCount">0</strong>
+            </div>
+
+            <div>
+              <span>Failed</span>
+              <strong id="promotionFailedCount">0</strong>
+            </div>
+
+            <div>
+              <span>Selected</span>
+              <strong id="promotionSelectedCount">0</strong>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle promotion-table">
+              <thead>
+                <tr>
+                  <th>Select</th>
+                  <th>Rank</th>
+                  <th>Old Roll</th>
+                  <th>New Roll</th>
+                  <th>Section</th>
+                  <th>Optional</th>
+                  <th>Student Name</th>
+                  <th>Total Marks</th>
+                  <th>GPA</th>
+                  <th>Grade</th>
+                  <th>Status</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+
+              <tbody id="promotionTableBody">
+                <tr>
+                  <td colspan="12" class="empty-table-message">
+                    No students loaded for promotion.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="promotion-final-actions">
+            <button
+              type="button"
+              class="btn btn-success"
+              id="promoteSelectedStudentsBtn"
+            >
+              <i class="fas fa-level-up-alt"></i>
+              Promote Selected Students
+            </button>
+          </div>
+        </section>
+
+        <section class="promotion-summary-card" id="promotionSummaryCard">
+          <h3>
+            <i class="fas fa-clipboard-check"></i>
+            Promotion Summary
+          </h3>
+
+          <div id="promotionSummaryContent">No promotion completed yet.</div>
+        </section>
+      </div>
+
+      <div id="footer-container"></div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-config.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/component.js"></script>
+    <script src="../assets/js/admin-profile.js"></script>
+    <script src="../assets/js/students.js"></script>
+  </body>
+</html>

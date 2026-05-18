@@ -1,0 +1,452 @@
+/* =====================================================
+   BHS Final Layout Stabilizer
+   Loaded last to prevent conflicts from page-specific CSS.
+   Desktop: Header 90%, page content 80%. Tablet/mobile: full.
+===================================================== */
+
+:root {
+  --admin-header-width: 90%;
+  --admin-content-width: 80%;
+  --admin-max-width: 1500px;
+  --admin-header-max-width: 1680px;
+  --table-scroll-height: min(68vh, 720px);
+}
+
+body.admin-page {
+  background: #eef4ff !important;
+  overflow-x: hidden !important;
+}
+
+#admin-header-container {
+  width: auto !important;
+  max-width: none !important;
+  left: 280px !important;
+  right: 0 !important;
+  top: 0 !important;
+  padding: 18px 0 14px !important;
+  background: #eef4ff !important;
+  backdrop-filter: none !important;
+}
+
+#admin-header-container {
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  padding: 14px 0 10px !important;
+}
+
+.dashboard-header-bar {
+  width: var(--admin-header-width) !important;
+  max-width: var(--admin-header-max-width) !important;
+  min-height: 78px !important;
+  margin: 0 auto !important;
+  background: #ffffff !important;
+}
+
+.main-content {
+  margin-left: 280px !important;
+  padding-top: 130px !important;
+  overflow-x: hidden !important;
+}
+
+.students-page-section,
+.db-page,
+.result-page-card,
+.page-container,
+.notice-page,
+.bhs-admin-page,
+.public-section,
+.public-page-container,
+.result-checker-container {
+  width: var(--admin-content-width) !important;
+  max-width: var(--admin-max-width) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+.control-card,
+.add-student-toggle-card,
+.student-form-card,
+.student-list-card,
+.promotion-card,
+.promotion-list-card,
+.promotion-summary-card,
+.result-page-card,
+.tm-page-card,
+.tm-toolbar-card,
+.tm-form-card,
+.tm-list-card,
+.notice-card,
+.notice-control-card,
+.notice-form-card,
+.notice-list-card,
+.db-dashboard-header-card,
+.db-card,
+.db-section-card,
+.admin-profile-card,
+.bhs-admin-card,
+.summary-card,
+.page-header {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Universal admin table behavior */
+.table-responsive,
+.students-list-table-wrap,
+.result-table-wrap,
+.result-manage-responsive,
+.result-wide-scroll,
+.report-card .table-responsive,
+.db-result-subject-table-wrap,
+.bhs-admin-table-wrap,
+.tm-table-wrap,
+.notice-table-wrap {
+  width: 100% !important;
+  max-width: 100% !important;
+  max-height: var(--table-scroll-height) !important;
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  border-radius: 16px !important;
+}
+
+.table,
+table.table,
+.students-list-table,
+.promotion-table,
+.result-entry-table,
+.manage-results-table,
+.report-ranking-table,
+.bhs-admin-table,
+.db-result-subject-table {
+  width: 100% !important;
+  max-width: none !important;
+  table-layout: auto !important;
+  border-collapse: collapse !important;
+}
+
+.students-list-table {
+  min-width: 1080px !important;
+}
+
+.promotion-table {
+  min-width: 1480px !important;
+}
+
+.result-entry-table {
+  min-width: 980px !important;
+}
+
+.manage-results-table {
+  min-width: 1160px !important;
+}
+
+.report-ranking-table {
+  min-width: max-content !important;
+}
+
+.bhs-admin-table {
+  min-width: 960px !important;
+}
+
+.students-list-table th,
+.students-list-table td,
+.promotion-table th,
+.promotion-table td,
+.result-entry-table th,
+.result-entry-table td,
+.manage-results-table th,
+.manage-results-table td,
+.report-ranking-table th,
+.report-ranking-table td,
+.table th,
+.table td {
+  display: table-cell !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.students-list-table thead th,
+.promotion-table thead th,
+.result-entry-table thead th,
+.manage-results-table thead th,
+.report-ranking-table thead th,
+.table thead th {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 8 !important;
+  background: #003d73 !important;
+  color: #ffffff !important;
+}
+
+.students-list-table th:nth-child(2),
+.students-list-table td:nth-child(2),
+.promotion-table th:nth-child(6),
+.promotion-table td:nth-child(6),
+.promotion-table th:nth-child(12),
+.promotion-table td:nth-child(12) {
+  white-space: normal !important;
+  min-width: 190px !important;
+}
+
+.students-list-table .student-col-serial {
+  width: 90px;
+}
+
+.students-list-table .student-col-name {
+  width: 240px;
+}
+
+.students-list-table .student-col-roll {
+  width: 100px;
+}
+
+.students-list-table .student-col-class {
+  width: 130px;
+}
+
+.students-list-table .student-col-section {
+  width: 150px;
+}
+
+.students-list-table .student-col-religion {
+  width: 130px;
+}
+
+.students-list-table .student-col-optional {
+  width: 190px;
+}
+
+.students-list-table .student-col-actions {
+  width: 190px;
+}
+
+.table-action-buttons,
+.action-buttons {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+  gap: 8px !important;
+}
+
+.download-actions,
+.result-actions-top,
+.report-action-row,
+.tm-actions,
+.notice-actions {
+  max-width: 100% !important;
+  flex-wrap: wrap !important;
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --admin-header-width: calc(100% - 28px);
+    --admin-content-width: calc(100% - 28px);
+  }
+
+  #admin-header-container {
+    left: 280px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --admin-header-width: calc(100% - 20px);
+    --admin-content-width: calc(100% - 20px);
+    --table-scroll-height: 64vh;
+  }
+
+  #admin-header-container {
+    left: 0 !important;
+    padding: 14px 0 12px !important;
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    padding-top: 122px !important;
+  }
+
+  .students-page-section,
+  .db-page,
+  .result-page-card,
+  .page-container,
+  .notice-page,
+  .bhs-admin-page,
+  .public-section,
+  .public-page-container,
+  .result-checker-container {
+    max-width: none !important;
+  }
+}
+
+@media (max-width: 576px) {
+  :root {
+    --admin-header-width: calc(100% - 12px);
+    --admin-content-width: calc(100% - 12px);
+    --table-scroll-height: 60vh;
+  }
+
+  .main-content {
+    padding-top: 112px !important;
+  }
+}
+
+/* Public pages use the same clean width rule on desktop. */
+body:not(.admin-page) .section,
+body:not(.admin-page) .public-result-hero,
+body:not(.admin-page) .public-result-container {
+  width: 80% !important;
+  max-width: 1500px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+body:not(.admin-page) .card-container,
+body:not(.admin-page) .about-school-grid,
+body:not(.admin-page) .people-grid,
+body:not(.admin-page) .home-notice-grid,
+body:not(.admin-page) .public-result-card,
+body:not(.admin-page) .public-result-output {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+body:not(.admin-page) .table-responsive,
+body:not(.admin-page) .public-result-table-wrap {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+}
+
+@media (max-width: 1200px) {
+
+  body:not(.admin-page) .section,
+  body:not(.admin-page) .public-result-hero,
+  body:not(.admin-page) .public-result-container {
+    width: calc(100% - 28px) !important;
+    max-width: none !important;
+  }
+}
+
+@media (max-width: 576px) {
+
+  body:not(.admin-page) .section,
+  body:not(.admin-page) .public-result-hero,
+  body:not(.admin-page) .public-result-container {
+    width: calc(100% - 12px) !important;
+  }
+}
+
+/* Keep header controls clickable */
+#admin-header-container,
+.dashboard-header-bar,
+.exam-year-select,
+.admin-profile {
+  pointer-events: auto !important;
+}
+
+.main-content {
+  padding-top: 105px !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 900px) {
+  #admin-header-container {
+    left: 0 !important;
+    right: 0 !important;
+    padding: 12px 12px 8px !important;
+  }
+
+  .dashboard-header-bar {
+    width: 100% !important;
+    min-height: 60px !important;
+  }
+
+  .main-content {
+    padding-top: 95px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .dashboard-header-bar {
+    gap: 8px !important;
+  }
+
+  .dashboard-title {
+    font-size: 1rem !important;
+  }
+
+  .exam-year-select {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+  }
+
+  .admin-profile {
+    padding: 6px 8px !important;
+  }
+}
+
+/* =====================================================
+   Admin/Public Footer Center Fix
+   Paste at END of assets/css/layout-clean.css
+===================================================== */
+
+#footer-container {
+  width: 80% !important;
+  max-width: 80% !important;
+  margin: 28px auto 0 !important;
+  padding: 18px 16px 28px !important;
+  text-align: center !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#footer-container footer,
+#footer-container .footer,
+#footer-container .public-footer,
+#footer-container .site-footer {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+#footer-container p,
+#footer-container span,
+#footer-container a {
+  text-align: center !important;
+}
+
+#footer-container p {
+  margin: 5px auto !important;
+}
+
+/* Sidebar footer আগের জায়গাতেই থাকবে */
+.sidebar-footer,
+.admin-sidebar .sidebar-footer {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: auto !important;
+  text-align: center !important;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  #footer-container {
+    width: 95% !important;
+    max-width: 95% !important;
+  }
+}

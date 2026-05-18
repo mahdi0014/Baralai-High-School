@@ -1,0 +1,1242 @@
+/* =====================================================
+   FILE: results.css
+   PAGE: results.html
+   PURPOSE: Result management page design only
+   NOTE: No sidebar, no header, no footer, no common reset
+===================================================== */
+
+/* =====================================================
+   01. RESULT PAGE WRAPPER
+===================================================== */
+
+.result-page-card {
+  width: min(100% - 32px, 1720px);
+  max-width: none;
+  min-width: 0;
+  margin: 0 auto 28px;
+  padding: 26px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  animation: fadeUp 0.35s ease both;
+}
+
+/* =====================================================
+   02. RESULT PAGE TITLE
+===================================================== */
+
+.result-page-title {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+  padding: 26px;
+  color: var(--white);
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.17), transparent 28%),
+    linear-gradient(135deg, var(--primary-dark), var(--primary), var(--primary-light));
+  border-radius: 26px;
+  overflow: hidden;
+}
+
+.result-page-title::before {
+  content: "";
+  position: absolute;
+  top: -70px;
+  right: -55px;
+  width: 180px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.11);
+  border-radius: 50%;
+}
+
+.result-page-title > * {
+  position: relative;
+  z-index: 1;
+}
+
+.result-page-title h2 {
+  margin: 0 0 8px;
+  color: var(--white);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.result-page-title p {
+  margin: 0;
+  color: #dbeafe;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.result-exam-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 14px;
+  color: #78350f;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: var(--pill);
+  font-size: 13px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* =====================================================
+   03. RESULT TABS
+===================================================== */
+
+.result-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 10px;
+  background: #f8fbff;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+}
+
+.result-tab-btn {
+  flex: 1;
+  min-width: 175px;
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 16px;
+  color: var(--primary);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--pill);
+  font-size: 14px;
+  font-weight: 900;
+  transition: var(--transition);
+}
+
+.result-tab-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.result-tab-btn.active {
+  color: var(--white);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-color: transparent;
+  box-shadow: 0 12px 26px rgba(0, 51, 102, 0.2);
+}
+
+.result-tab-content {
+  display: none;
+  animation: fadeUp 0.25s ease both;
+}
+
+.result-tab-content.active {
+  display: block;
+}
+
+/* =====================================================
+   04. SECTION HEADER & FORM GRID
+===================================================== */
+
+.result-section-header {
+  margin-bottom: 18px;
+}
+
+.result-section-header h3 {
+  margin: 0 0 6px;
+  color: var(--primary);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.result-section-header p {
+  max-width: 720px;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.result-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.result-actions-top,
+.result-save-actions,
+.download-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+/* =====================================================
+   05. MANAGE RESULT TOOLBAR
+===================================================== */
+
+.result-list-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+
+.result-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.student-search-box {
+  width: 300px;
+  margin: 0;
+}
+
+.student-search-box .form-control,
+.result-toolbar .student-search-box .form-control {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 0;
+}
+
+/* =====================================================
+   06. RESULT ENTRY TABLE
+===================================================== */
+
+.result-table-wrap {
+  margin-top: 12px;
+}
+
+.result-entry-table {
+  min-width: 820px;
+}
+
+.result-entry-table .mark-input,
+.mark-input {
+  width: 100%;
+  min-width: 80px;
+  max-width: 130px;
+  min-height: 38px;
+  margin: 0 auto;
+  padding: 8px 10px;
+  color: var(--text-dark);
+  background: var(--white);
+  border: 1.5px solid #d7e2f0;
+  border-radius: 10px;
+  outline: none;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.result-entry-table .mark-input:focus,
+.mark-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(0, 51, 102, 0.11);
+}
+
+.mark-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 5px 9px;
+  border-radius: var(--pill);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.mark-status.saved {
+  color: #166534;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+}
+
+.mark-status.pending {
+  color: #475569;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.mark-status.ready {
+  color: #1d4ed8;
+  background: #dbeafe;
+  border: 1px solid #bfdbfe;
+}
+
+/* =====================================================
+   07. MANAGE RESULT TABLE
+===================================================== */
+
+.result-manage-table {
+  min-width: 720px;
+  table-layout: fixed;
+}
+
+.result-manage-table th,
+.result-manage-table td {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.result-manage-table th:nth-child(1),
+.result-manage-table td:nth-child(1) {
+  width: 10%;
+}
+
+.result-manage-table th:nth-child(2),
+.result-manage-table td:nth-child(2) {
+  width: 30%;
+}
+
+.result-manage-table th:nth-child(3),
+.result-manage-table td:nth-child(3) {
+  width: 13%;
+}
+
+.result-manage-table th:nth-child(4),
+.result-manage-table td:nth-child(4) {
+  width: 17%;
+}
+
+.result-manage-table th:nth-child(5),
+.result-manage-table td:nth-child(5) {
+  width: 12%;
+}
+
+.result-manage-table th:nth-child(6),
+.result-manage-table td:nth-child(6) {
+  width: 18%;
+}
+
+#manageResultTableWrap[hidden] {
+  display: none !important;
+}
+
+.editing-row {
+  background: #fff7d6 !important;
+  outline: 2px solid var(--warning);
+  animation: resultSoftPulse 1.6s ease-in-out 2;
+}
+
+@keyframes resultSoftPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.28);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(245, 158, 11, 0);
+  }
+}
+
+/* =====================================================
+   08. SUBJECT MANAGEMENT
+===================================================== */
+
+.subject-add-row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.subject-add-row .form-control {
+  margin-bottom: 0;
+}
+
+.subject-add-row .btn {
+  min-width: 90px;
+}
+
+.subject-chip-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-height: 78px;
+  margin-top: 18px;
+  padding: 18px;
+  background: #f8fbff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+.subject-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  color: var(--primary);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--pill);
+  font-size: 14px;
+  font-weight: 900;
+  animation: resultScaleIn 0.22s ease both;
+}
+
+@keyframes resultScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.subject-chip button,
+.subject-remove-btn {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--danger);
+  background: #fee2e2;
+  border: none;
+  border-radius: 50%;
+  font-size: 12px;
+  transition: var(--transition);
+}
+
+.subject-chip button:hover,
+.subject-remove-btn:hover {
+  color: var(--white);
+  background: var(--danger);
+}
+
+/* =====================================================
+   09. EXPORT REPORT
+===================================================== */
+
+.report-preview {
+  min-height: 160px;
+  margin-top: 20px;
+  padding: 20px;
+  background: #f8fbff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.report-preview h3,
+.report-preview h4 {
+  color: var(--primary);
+  font-weight: 900;
+}
+
+.report-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.report-summary-item {
+  padding: 15px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.report-summary-item span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.report-summary-item strong {
+  color: var(--primary);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.publish-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0;
+  padding: 13px 15px;
+  border-radius: 15px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.success-note {
+  color: #166534;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+}
+
+.warning-note {
+  color: #92400e;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+}
+
+/* =====================================================
+   10. STATUS TEXT
+===================================================== */
+
+#resultStatus,
+#subjectsStatus,
+#exportStatus,
+.mt-2 {
+  min-height: 22px;
+  margin-top: 14px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.text-danger {
+  color: var(--danger) !important;
+}
+
+.text-success {
+  color: var(--success) !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+/* =====================================================
+   11. RESULT DETAILS MODAL
+===================================================== */
+
+.result-modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.58);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.result-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.result-modal-box {
+  width: min(760px, 100%);
+  max-height: 90vh;
+  overflow: hidden;
+  background: var(--white);
+  border-radius: 26px;
+  box-shadow: var(--shadow-popup);
+  transform: translateY(20px) scale(0.98);
+  transition: var(--transition);
+}
+
+.result-modal.show .result-modal-box {
+  transform: translateY(0) scale(1);
+}
+
+.result-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+}
+
+.result-modal-header h3 {
+  margin: 0 0 5px;
+  color: var(--white);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.result-modal-header p {
+  margin: 0;
+  color: #dbeafe;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.result-modal-close {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 14px;
+  transition: var(--transition);
+}
+
+.result-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.result-modal-body {
+  max-height: 62vh;
+  overflow-y: auto;
+  padding: 22px;
+  background: #f8fbff;
+}
+
+.result-modal-basic {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.result-modal-marks {
+  display: grid;
+  gap: 12px;
+}
+
+.result-info-item,
+.result-mark-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: 15px;
+}
+
+.result-info-label,
+.result-mark-label {
+  min-width: 110px;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.result-info-value,
+.result-mark-value {
+  flex: 1;
+  color: var(--text-dark);
+  text-align: right;
+  word-break: break-word;
+  font-weight: 800;
+}
+
+.result-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 18px 22px;
+  background: var(--white);
+  border-top: 1px solid var(--border-soft);
+}
+
+/* =====================================================
+   12. RESULTS PAGE RESPONSIVE
+===================================================== */
+
+@media (max-width: 1400px) {
+  .result-page-card {
+    width: 86%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .result-page-card {
+    width: 92%;
+  }
+
+  .report-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .result-page-card {
+    width: 100%;
+  }
+
+  .result-page-title,
+  .result-list-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .result-toolbar {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .student-search-box,
+  .result-toolbar .student-search-box {
+    width: 100%;
+  }
+
+  .result-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .result-tab-btn {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .result-page-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .result-page-title {
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .result-form-grid,
+  .result-modal-basic,
+  .report-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-actions-top,
+  .result-save-actions,
+  .download-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .result-actions-top .btn,
+  .result-save-actions .btn,
+  .download-actions .btn {
+    width: 100%;
+  }
+
+  .subject-add-row {
+    flex-direction: column;
+  }
+
+  .subject-add-row .btn {
+    width: 100%;
+  }
+
+  .result-info-item,
+  .result-mark-item {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .result-info-value,
+  .result-mark-value {
+    text-align: left;
+  }
+
+  .result-modal-footer {
+    justify-content: stretch;
+  }
+
+  .result-modal-footer .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .result-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .result-page-title h2 {
+    font-size: 1.65rem;
+  }
+
+  .result-section-header h3 {
+    font-size: 20px;
+  }
+
+  .result-exam-badge {
+    width: 100%;
+  }
+
+  .result-modal-header h3 {
+    font-size: 19px;
+  }
+
+  .result-modal-body {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .result-page-card {
+    padding: 14px;
+  }
+
+  .result-page-title {
+    padding: 18px;
+  }
+
+  .result-page-title h2,
+  .result-section-header h3 {
+    font-size: 18px;
+  }
+}
+/* Sidebar now controls these result sections */
+.result-tabs {
+  display: none;
+}
+
+/* =====================================================
+   MANUAL SUBJECT + COMPONENT MARKING UPDATE
+===================================================== */
+
+.result-entry-table {
+  min-width: 1100px;
+}
+
+.result-entry-table th small,
+.ranking-report-table th small {
+  display: block;
+  margin-top: 3px;
+  color: inherit;
+  opacity: 0.82;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.result-entry-table .part-input,
+.result-entry-table .mark-input.part-input {
+  min-width: 76px;
+  max-width: 110px;
+}
+
+.subject-total-cell,
+.subject-point-cell,
+.subject-grade-cell {
+  min-width: 78px;
+  text-align: center;
+  color: var(--primary);
+  font-weight: 900;
+}
+
+.mark-status.error {
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+}
+
+.subject-empty-panel {
+  width: 100%;
+  min-height: 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 18px;
+  color: var(--text-muted);
+  background: var(--white);
+  border: 1px dashed #bfd0e6;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.subject-empty-panel i {
+  color: var(--primary);
+  font-size: 24px;
+}
+
+.subject-empty-panel strong {
+  color: var(--primary);
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.subject-empty-panel span {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.result-manage-table {
+  min-width: 1040px;
+  table-layout: auto;
+}
+
+.result-manage-table th,
+.result-manage-table td {
+  vertical-align: middle;
+}
+
+.ranking-report-table {
+  min-width: 1120px;
+}
+
+.ranking-report-table td,
+.ranking-report-table th {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.ranking-report-table td:nth-child(2),
+.ranking-report-table th:nth-child(2) {
+  text-align: left;
+}
+
+.subject-detail-item .result-mark-value {
+  line-height: 1.65;
+}
+
+.publish-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border-radius: var(--pill);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.publish-badge.published {
+  color: #166534;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+}
+
+.publish-badge.draft {
+  color: #92400e;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+}
+
+.publish-badge.incomplete {
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+}
+
+.status-success {
+  color: #166534 !important;
+  font-weight: 800;
+}
+
+.status-error {
+  color: #991b1b !important;
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .result-entry-table .part-input,
+  .result-entry-table .mark-input.part-input {
+    min-width: 70px;
+  }
+}
+
+
+/* =====================================================
+   MANAGE RESULTS RESPONSIVE FIX - ranking update
+===================================================== */
+.result-manage-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 18px;
+}
+
+.result-manage-table-auto,
+.result-manage-table {
+  width: 100%;
+  min-width: 860px;
+  table-layout: auto !important;
+}
+
+.result-manage-table-auto th,
+.result-manage-table-auto td,
+.result-manage-table th,
+.result-manage-table td {
+  width: auto !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.result-manage-table-auto th:nth-child(2),
+.result-manage-table-auto td:nth-child(2),
+.result-manage-table th:nth-child(2),
+.result-manage-table td:nth-child(2) {
+  text-align: left;
+  white-space: normal !important;
+  min-width: 170px;
+}
+
+.result-manage-table-auto th:nth-child(8),
+.result-manage-table-auto td:nth-child(8),
+.result-manage-table th:nth-child(8),
+.result-manage-table td:nth-child(8) {
+  min-width: 120px;
+}
+
+.result-manage-table-auto th:nth-child(9),
+.result-manage-table-auto td:nth-child(9),
+.result-manage-table th:nth-child(9),
+.result-manage-table td:nth-child(9) {
+  min-width: 150px;
+}
+
+.table-action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rank-info-item .result-info-value {
+  color: var(--primary);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+@media (max-width: 768px) {
+  .result-manage-table-auto,
+  .result-manage-table {
+    min-width: 820px;
+  }
+
+  .result-toolbar {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =====================================================
+   SECTION/GROUP + SUBJECT METADATA UPDATE
+===================================================== */
+.bhs-section-field[hidden] {
+  display: none !important;
+}
+
+.result-subject-form-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.subject-add-action {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.subject-add-action .btn {
+  min-height: 46px;
+  width: 100%;
+}
+
+.subject-chip-detailed {
+  align-items: center;
+  gap: 12px;
+}
+
+.subject-chip-detailed span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  line-height: 1.3;
+}
+
+.subject-chip-detailed small,
+.subject-detail-item small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.section-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 26px;
+  padding: 5px 10px;
+  color: #065f46;
+  background: #dcfce7;
+  border: 1px solid #86efac;
+  border-radius: var(--pill);
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.result-manage-table-auto {
+  min-width: 1120px;
+}
+
+@media (max-width: 992px) {
+  .result-subject-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .result-subject-form-grid,
+  .result-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =====================================================
+   REPORT PREVIEW WIDE TABLE FIX
+   Keeps many subject columns readable by using page width + horizontal scroll.
+===================================================== */
+.report-preview {
+  overflow: hidden;
+}
+
+.report-card {
+  width: 100%;
+  min-width: 0;
+}
+
+.report-card .table-responsive,
+.result-wide-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background: var(--white);
+}
+
+.ranking-report-table {
+  width: max-content;
+  min-width: var(--ranking-table-min-width, 1800px) !important;
+  table-layout: fixed !important;
+  margin-top: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.ranking-report-table th,
+.ranking-report-table td {
+  padding: 10px 8px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-height: 1.25;
+  font-size: 12px;
+}
+
+.ranking-report-table th {
+  vertical-align: middle;
+}
+
+.ranking-report-table .rank-col { width: 62px; }
+.ranking-report-table .name-col { width: 150px; }
+.ranking-report-table .roll-col { width: 70px; }
+.ranking-report-table .group-col { width: 95px; }
+.ranking-report-table .subject-col { width: 138px; }
+.ranking-report-table .total-col { width: 95px; }
+.ranking-report-table .gpa-col { width: 75px; }
+.ranking-report-table .point-col { width: 90px; }
+.ranking-report-table .grade-col { width: 75px; }
+.ranking-report-table .status-col { width: 115px; }
+
+.report-subject-head {
+  display: grid;
+  gap: 4px;
+  align-items: center;
+  justify-items: center;
+  min-width: 0;
+}
+
+.report-subject-head strong {
+  display: block;
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.report-subject-head small {
+  display: block;
+  color: #dbeafe;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.ranking-report-table .student-name-cell {
+  text-align: left;
+  font-weight: 800;
+}
+
+.ranking-report-table .subject-mark-cell {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.result-actions-top,
+.export-actions {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .result-page-card,
+  .students-page-section,
+  .db-page,
+  .page-container,
+  .notice-page {
+    width: min(100% - 20px, 1720px);
+  }
+
+  .result-page-card {
+    padding: 18px;
+  }
+
+  .ranking-report-table th,
+  .ranking-report-table td {
+    padding: 9px 7px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 576px) {
+  .result-page-card {
+    width: calc(100% - 14px);
+    padding: 14px;
+  }
+
+  .report-preview {
+    padding: 12px;
+  }
+}

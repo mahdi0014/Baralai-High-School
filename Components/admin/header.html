@@ -1,0 +1,49 @@
+<div class="admin-topbar">
+  <div class="dashboard-header-bar">
+    <div class="dashboard-title">
+      <i class="fas fa-tachometer-alt" id="headerIcon"></i>
+      <span id="headerTitle">Dashboard</span>
+    </div>
+
+    <div class="exam-year-select">
+      <i class="fas fa-calendar"></i>
+      <select class="year-dropdown" id="examYear">
+        <option value="" disabled>Select Exam Year</option>
+      </select>
+    </div>
+
+    <div class="admin-profile" id="adminProfileBtn">
+      <div class="admin-avatar" id="headerAdminAvatar">A</div>
+      <div class="admin-name">
+        <span id="headerAdminName">Admin</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+
+    <div class="admin-popup" id="adminPopup">
+      <div class="popup-arrow"></div>
+      <div class="popup-content">
+        <div class="popup-avatar popup-avatar-text" id="popupAvatar">A</div>
+        <h5 id="popupName">Admin</h5>
+        <p id="popupEmail">admin@baralaischool.edu</p>
+        <p id="popupDesignation">Administrator</p>
+
+        <button class="btn-secondary" id="popupProfileBtn" type="button">
+          <i class="fas fa-user"></i> Profile
+        </button>
+
+        <button class="btn-secondary admin-add-btn" id="popupAddAdminBtn" type="button" hidden>
+          <i class="fas fa-user-plus"></i> Add Admin
+        </button>
+
+        <button class="btn-secondary admin-manage-btn" id="popupManageAdminsBtn" type="button" hidden>
+          <i class="fas fa-users-cog"></i> Manage Admins
+        </button>
+
+        <button class="logout-btn" id="popupLogoutBtn" type="button">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

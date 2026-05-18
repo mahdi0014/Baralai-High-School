@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baralai High School</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/public-result-download.css" />
+    <link rel="stylesheet" href="assets/css/layout-clean.css" />
+  </head>
+
+  <body>
+    <!-- Header & Navigation -->
+    <div id="public-header-container"></div>
+
+    <section class="public-result-hero">
+      <div class="public-result-hero-content">
+        <div class="public-result-hero-badge">
+          <i class="fas fa-award"></i>
+          Official Result Checker
+        </div>
+        <h1>Check Your Exam Result</h1>
+        <p>
+          Select exam year, class and group/section if needed, then enter your roll number to view your
+          published final exam marksheet.
+        </p>
+      </div>
+    </section>
+
+    <section class="public-result-container">
+      <div class="result-search-box">
+        <div class="result-search-title">
+          <div>
+            <h2><i class="fas fa-chart-line"></i> Result Search</h2>
+            <p>Only published final exam results will be visible here.</p>
+          </div>
+          <div class="result-search-icon">
+            <i class="fas fa-magnifying-glass-chart"></i>
+          </div>
+        </div>
+
+        <div class="result-search-group">
+          <div class="result-field">
+            <label for="resultYear">Exam Year</label>
+            <select id="resultYear" class="result-select">
+              <option value="">Select Year</option>
+            </select>
+          </div>
+
+          <div class="result-field">
+            <label for="resultClass">Class</label>
+            <select id="resultClass" class="result-select">
+              <option value="">Select Class</option>
+            </select>
+          </div>
+
+          <div class="result-field" id="resultSectionPublicGroup" hidden>
+            <label for="resultSection">Group / Section</label>
+            <select id="resultSection" class="result-select">
+              <option value="">Select Group / Section</option>
+              <option value="Science">Science</option>
+              <option value="Arts">Arts / Humanities</option>
+              <option value="Commerce">Commerce / Business Studies</option>
+            </select>
+          </div>
+
+          <div class="result-field">
+            <label for="rollNumber">Roll Number</label>
+            <input
+              type="text"
+              id="rollNumber"
+              class="result-input"
+              placeholder="Enter Roll Number"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="result-field">
+            <label>&nbsp;</label>
+            <button onclick="searchResult()" class="result-btn">
+              <i class="fas fa-search"></i> Search Result
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="loadingSpinner" class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i> Fetching your result...
+      </div>
+
+      <div id="errorMessage" class="error-msg"></div>
+      <div id="resultDisplay"></div>
+
+      <div class="result-help-grid">
+        <div class="result-help-card">
+          <i class="fas fa-circle-check"></i>
+          <h3>Published Result Only</h3>
+          <p>
+            Students can view results only after the admin publishes the
+            class-wise final result.
+          </p>
+        </div>
+
+        <div class="result-help-card">
+          <i class="fas fa-ranking-star"></i>
+          <h3>Ranking System</h3>
+          <p>
+            Rank is calculated by GPA first. If GPA is same, total marks decide
+            the ranking.
+          </p>
+        </div>
+
+        <div class="result-help-card">
+          <i class="fas fa-file-pdf"></i>
+          <h3>Download Marksheet</h3>
+          <p>
+            After finding the result, students can print or download a PDF
+            result sheet.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div id="pdfExportContainer" aria-hidden="true"></div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="assets/js/supabase-config.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/component.js"></script>
+  </body>
+</html>

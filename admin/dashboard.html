@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Admin Dashboard - Baralai High School</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../assets/css/components.css" />
+    <link rel="stylesheet" href="../assets/css/dashboard.css" />
+    <link rel="stylesheet" href="../assets/css/layout-clean.css" />
+  </head>
+
+  <body class="admin-page">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content" id="appBody">
+      <div id="admin-header-container"></div>
+
+      <section class="db-page">
+        <div class="db-dashboard-header-card">
+          <div>
+            <span class="db-dashboard-badge">
+              <i class="fas fa-chart-line"></i>
+              Performance Dashboard
+            </span>
+
+            <h1>Dashboard</h1>
+            <p>
+              Final exam result performance overview of Baralai High School.
+            </p>
+          </div>
+
+          <div class="dashboard-info-card">
+            <div class="info-row">
+              <span class="label">Selected Exam Year</span>
+              <span class="value" id="dashboardExamYear"></span>
+            </div>
+            <div class="info-row">
+              <span class="label">Dashboard Status</span>
+              <span class="value" id="dashboardStatus">Loading...</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Last Updated</span>
+              <span class="value" id="lastUpdated">--</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="db-dashboard-tabs">
+          <button
+            type="button"
+            class="db-tab-btn active"
+            data-dashboard-tab="dashboard"
+          >
+            <i class="fas fa-gauge-high"></i>
+            Dashboard
+          </button>
+
+          <button
+            type="button"
+            class="db-tab-btn"
+            data-dashboard-tab="performance"
+          >
+            <i class="fas fa-ranking-star"></i>
+            Class Performance Ranking
+          </button>
+
+          <button type="button" class="db-tab-btn" data-dashboard-tab="top10">
+            <i class="fas fa-trophy"></i>
+            School Top 10 Students
+          </button>
+        </div>
+
+        <div class="db-tab-section active" data-dashboard-section="dashboard">
+          <div class="db-card-grid db-card-grid-2">
+            <div class="db-card db-passing-rate-card">
+              <div class="db-card-header">
+                <div>
+                  <h3>Passing Rate</h3>
+                  <p>Current year final exam summary.</p>
+                </div>
+
+                <div class="db-card-header-icon">
+                  <i class="fas fa-chart-pie"></i>
+                </div>
+              </div>
+
+              <div class="db-passing-main">
+                <h2 id="dashboardPassingRate">0%</h2>
+                <span>Overall Passing Rate</span>
+              </div>
+
+              <div class="db-mini-stat-grid">
+                <div class="db-mini-stat-card">
+                  <span>Total Students</span>
+                  <strong id="dashboardTotalStudents">0</strong>
+                </div>
+
+                <div class="db-mini-stat-card">
+                  <span>Passed</span>
+                  <strong id="dashboardPassedStudents">0</strong>
+                </div>
+
+                <div class="db-mini-stat-card">
+                  <span>Failed</span>
+                  <strong id="dashboardFailedStudents">0</strong>
+                </div>
+
+                <div class="db-mini-stat-card">
+                  <span>Pending</span>
+                  <strong id="dashboardPendingResults">0</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="db-card db-chart-card">
+              <div class="db-card-header">
+                <div>
+                  <h3>Result Chart</h3>
+                  <p>Compare current year result with previous years.</p>
+                </div>
+
+                <div class="db-card-header-icon">
+                  <i class="fas fa-chart-column"></i>
+                </div>
+              </div>
+
+              <div class="db-chart-box">
+                <canvas id="resultComparisonChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="db-tab-section" data-dashboard-section="performance">
+          <div class="db-card db-performance-card">
+            <div class="db-card-header">
+              <div>
+                <h3>Class Performance Ranking</h3>
+                <p>Ranking is based on pass rate first, then average GPA.</p>
+              </div>
+
+              <div class="db-card-header-icon">
+                <i class="fas fa-ranking-star"></i>
+              </div>
+            </div>
+
+            <div class="db-performance-grid" id="classPerformanceGrid">
+              <div class="db-empty-item">No class performance data found.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="db-tab-section" data-dashboard-section="top10">
+          <div class="db-card db-school-top-card">
+            <div class="db-card-header">
+              <div>
+                <h3>School Top 10 Students</h3>
+                <p>
+                  Entire school ranking based on ranking score and total marks.
+                </p>
+              </div>
+
+              <div class="db-card-header-icon">
+                <i class="fas fa-trophy"></i>
+              </div>
+            </div>
+
+            <div class="db-school-top-summary">
+              <div>
+                <span>Ranking Method</span>
+                <strong>Ranking Score → Total Mark</strong>
+              </div>
+
+              <div>
+                <span>Exam</span>
+                <strong>Final Exam</strong>
+              </div>
+            </div>
+
+            <div class="db-school-top-list" id="schoolTop10CardList">
+              <div class="db-empty-item">No completed result found.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="db-modal-overlay" id="dashboardTopModal">
+        <div class="db-modal-box">
+          <div class="db-modal-header">
+            <div>
+              <h3 id="dashboardTopModalTitle">Class Top 10 Students</h3>
+              <p id="dashboardTopModalSubtitle">
+                Based on GPA first, then total marks.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              class="db-modal-close"
+              id="closeDashboardTopModal"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <div class="db-modal-body" id="dashboardTopModalBody"></div>
+        </div>
+      </div>
+
+      <div id="footer-container"></div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-config.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/component.js"></script>
+    <script src="../assets/js/admin-profile.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+  </body>
+</html>

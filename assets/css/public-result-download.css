@@ -1,0 +1,83 @@
+/* Public result download buttons and printable export container */
+.public-result-actions {
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.btn-pdf,
+.btn-print {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 26px;
+  border-radius: 60px;
+  font-weight: 900;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-pdf {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.btn-print {
+  background: #2d3748;
+  color: #ffffff;
+}
+
+.btn-pdf:hover,
+.btn-print:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+#pdfExportContainer {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  width: 820px;
+  background: #ffffff;
+  z-index: -1;
+  padding: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+@media (max-width: 640px) {
+  .btn-pdf,
+  .btn-print {
+    width: 100%;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #activeResultCard,
+  #activeResultCard * {
+    visibility: visible;
+  }
+
+  #activeResultCard {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .public-result-actions,
+  .result-help-grid,
+  .result-search-box,
+  .public-result-hero,
+  #public-header-container,
+  #footer-container {
+    display: none !important;
+  }
+}

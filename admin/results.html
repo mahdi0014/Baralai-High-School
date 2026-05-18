@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Result Management - Baralai High School</title>
+
+    <link rel="stylesheet" href="../assets/css/components.css" />
+    <link rel="stylesheet" href="../assets/css/results.css" />
+    <link rel="stylesheet" href="../assets/css/layout-clean.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  </head>
+
+  <body class="admin-page">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content" id="appBody">
+      <div id="admin-header-container"></div>
+
+      <section class="result-page-card">
+        <div class="result-page-title">
+          <div>
+            <h2>Result Management System</h2>
+            <p id="resultYearSubtitle">
+              Class, group/section and GPA-based Final Exam result management.
+            </p>
+          </div>
+
+          <span class="result-exam-badge">
+            <i class="fas fa-award"></i>
+            Class/Group Subjects + GPA Ranking
+          </span>
+        </div>
+
+        <div class="result-tabs">
+          <button
+            type="button"
+            class="result-tab-btn active"
+            data-tab="addResult"
+          >
+            <i class="fas fa-plus-circle"></i> Add Result
+          </button>
+
+          <button type="button" class="result-tab-btn" data-tab="manageResults">
+            <i class="fas fa-list"></i> Manage Results
+          </button>
+
+          <button
+            type="button"
+            class="result-tab-btn"
+            data-tab="manageSubjects"
+          >
+            <i class="fas fa-book"></i> Manage Subjects
+          </button>
+
+          <button type="button" class="result-tab-btn" data-tab="exportReport">
+            <i class="fas fa-file-export"></i> Export Report
+          </button>
+        </div>
+
+        <div class="result-tab-content active" id="addResultTab">
+          <div class="result-section-header">
+            <h3>Add Final Exam Component Marks</h3>
+            <p>
+              Select class, group/section and subject. Then enter MCQ, Written and optional
+              Practical marks. Total, point and grade will calculate
+              automatically.
+            </p>
+          </div>
+
+          <div class="result-form-grid">
+            <div>
+              <label for="resultClass" class="form-label">Select Class</label>
+              <select class="form-control" id="resultClass">
+                <option value="">Select Class</option>
+                <option value="6">Class 6</option>
+                <option value="7">Class 7</option>
+                <option value="8">Class 8</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+              </select>
+            </div>
+
+            <div class="bhs-section-field" id="resultSectionGroup" hidden>
+              <label for="resultSection" class="form-label">Select Group / Section</label>
+              <select class="form-control" id="resultSection">
+                <option value="">Select Group / Section</option>
+                <option value="Science">Science</option>
+                <option value="Arts">Arts / Humanities</option>
+                <option value="Commerce">Commerce / Business Studies</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="resultSubject" class="form-label"
+                >Select Subject</label
+              >
+              <select class="form-control" id="resultSubject">
+                <option value="">Select Subject</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="result-actions-top">
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="loadStudentsForResultBtn"
+            >
+              <i class="fas fa-users"></i> Load Students for Mark Entry
+            </button>
+
+            <button type="button" class="btn btn-secondary" id="clearMarksBtn">
+              <i class="fas fa-eraser"></i> Clear Marks
+            </button>
+          </div>
+
+          <div class="table-responsive result-table-wrap">
+            <table class="table result-entry-table">
+              <thead id="resultEntryHead"></thead>
+              <tbody id="resultEntryBody">
+                <tr>
+                  <td colspan="9" class="empty-table-message">
+                    Select class and manual subject to load students.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="result-save-actions">
+            <button type="button" class="btn btn-success" id="saveResultsBtn">
+              <i class="fas fa-save"></i> Save Component Marks
+            </button>
+          </div>
+
+          <div id="resultStatus" class="mt-2 text-muted"></div>
+        </div>
+
+        <div class="result-tab-content" id="manageResultsTab">
+          <div class="result-list-top">
+            <div class="result-section-header">
+              <h3>Manage Final Exam Results</h3>
+              <p id="manageResultSubtitle">
+                Select class and group/section to view GPA and total point based ranking.
+              </p>
+            </div>
+
+            <div class="result-toolbar">
+              <div class="student-search-box">
+                <label for="manageResultSearch" class="form-label"
+                  >Search Result</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="manageResultSearch"
+                  placeholder="Search by name or roll"
+                />
+              </div>
+
+              <div class="student-search-box">
+                <label for="manageClassFilter" class="form-label"
+                  >Select Class</label
+                >
+                <select class="form-control" id="manageClassFilter">
+                  <option value="">Select Class</option>
+                  <option value="6">Class 6</option>
+                  <option value="7">Class 7</option>
+                  <option value="8">Class 8</option>
+                  <option value="9">Class 9</option>
+                  <option value="10">Class 10</option>
+                </select>
+              </div>
+
+              <div class="student-search-box bhs-section-field" id="manageSectionFilterGroup" hidden>
+                <label for="manageSectionFilter" class="form-label">Group / Section</label>
+                <select class="form-control" id="manageSectionFilter">
+                  <option value="">All Groups</option>
+                  <option value="Science">Science</option>
+                  <option value="Arts">Arts / Humanities</option>
+                  <option value="Commerce">Commerce / Business Studies</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="table-responsive result-manage-responsive"
+            id="manageResultTableWrap"
+            hidden
+          >
+            <table class="table result-manage-table result-manage-table-auto">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Name</th>
+                  <th>Roll</th>
+                  <th>Total Marks</th>
+                  <th>Total GPA</th>
+                  <th>Total Point</th>
+                  <th>Grade</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="manageResultsBody">
+                <tr>
+                  <td colspan="9" class="empty-table-message">
+                    Select a class first.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="result-tab-content" id="manageSubjectsTab">
+          <div class="result-section-header">
+            <h3>Manage Subjects by Class & Group</h3>
+            <p>
+              Add or manage subjects class-wise. Class 9/10 subjects can be separated by Science, Arts/Humanities and Commerce/Business Studies.
+            </p>
+          </div>
+
+          <div class="result-form-grid result-subject-form-grid">
+            <div>
+              <label for="subjectClass" class="form-label">Select Class</label>
+              <select class="form-control" id="subjectClass">
+                <option value="">Select Class</option>
+                <option value="6">Class 6</option>
+                <option value="7">Class 7</option>
+                <option value="8">Class 8</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+              </select>
+            </div>
+
+            <div class="bhs-section-field" id="subjectSectionGroup" hidden>
+              <label for="subjectSection" class="form-label">Group / Section</label>
+              <select class="form-control" id="subjectSection">
+                <option value="Science">Science</option>
+                <option value="Arts">Arts / Humanities</option>
+                <option value="Commerce">Commerce / Business Studies</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="newSubjectName" class="form-label">New Subject</label>
+              <input
+                type="text"
+                class="form-control"
+                id="newSubjectName"
+                placeholder="Example: Physics"
+              />
+            </div>
+
+            <div>
+              <label for="newSubjectCode" class="form-label">Subject Code</label>
+              <input
+                type="text"
+                class="form-control"
+                id="newSubjectCode"
+                placeholder="Example: 136"
+              />
+            </div>
+
+            <div>
+              <label for="newSubjectType" class="form-label">Subject Type</label>
+              <select class="form-control" id="newSubjectType">
+                <option value="compulsory">Compulsory</option>
+                <option value="religion">Religion / Moral Education</option>
+                <option value="group_required">Group Required</option>
+                <option value="optional_4th">Optional / 4th Subject</option>
+                <option value="non_gpa">Non-GPA</option>
+              </select>
+            </div>
+
+            <div class="subject-add-action">
+              <label class="form-label">&nbsp;</label>
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="addSubjectBtn"
+              >
+                <i class="fas fa-plus"></i> Add Subject
+              </button>
+            </div>
+          </div>
+
+          <div class="subject-chip-area" id="subjectsList">
+            <p class="empty-table-message">
+              Select a class to manage manual subjects.
+            </p>
+          </div>
+
+          <div id="subjectsStatus" class="mt-2 text-muted"></div>
+        </div>
+        <div class="result-tab-content" id="exportReportTab">
+          <div class="result-section-header">
+            <h3>Export & Publish GPA Ranking Report</h3>
+            <p>
+              Preview class/group-wise draft result in GPA ranking format. Ranking is
+              calculated by Total GPA, Total Point, Total Marks and Roll.
+            </p>
+          </div>
+
+          <div class="result-form-grid">
+            <div>
+              <label for="exportClass" class="form-label">Select Class</label>
+              <select class="form-control" id="exportClass">
+                <option value="">Select Class</option>
+                <option value="6">Class 6</option>
+                <option value="7">Class 7</option>
+                <option value="8">Class 8</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+              </select>
+            </div>
+
+            <div class="bhs-section-field" id="exportSectionGroup" hidden>
+              <label for="exportSection" class="form-label">Group / Section</label>
+              <select class="form-control" id="exportSection">
+                <option value="">Select Group / Section</option>
+                <option value="Science">Science</option>
+                <option value="Arts">Arts / Humanities</option>
+                <option value="Commerce">Commerce / Business Studies</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="download-actions">
+            <button type="button" class="btn btn-primary" id="previewReportBtn">
+              <i class="fas fa-eye"></i> Preview Report
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-info"
+              id="downloadReportPdfBtn"
+            >
+              <i class="fas fa-file-pdf"></i> Download PDF
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-success"
+              id="downloadReportExcelBtn"
+            >
+              <i class="fas fa-file-excel"></i> Download Excel
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-warning"
+              id="publishClassResultBtn"
+              disabled
+            >
+              <i class="fas fa-upload"></i> Publish Class Result
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="editClassResultBtn"
+              disabled
+            >
+              <i class="fas fa-pen-to-square"></i> Edit Whole Class
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-danger"
+              id="unpublishClassResultBtn"
+              disabled
+            >
+              <i class="fas fa-rotate-left"></i> Undo Publish
+            </button>
+          </div>
+
+          <div id="exportStatus" class="mt-2 text-muted"></div>
+
+          <div class="report-preview" id="reportPreview">
+            <p class="empty-table-message">
+              Select class/group and preview GPA ranking report.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div id="footer-container"></div>
+
+      <div class="result-modal" id="resultModal">
+        <div class="result-modal-box">
+          <div class="result-modal-header">
+            <div>
+              <h3 id="resultModalTitle">Result Details</h3>
+              <p>Final Exam</p>
+            </div>
+
+            <button
+              type="button"
+              class="result-modal-close"
+              id="closeResultModal"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <div class="result-modal-body">
+            <div class="result-modal-basic" id="resultModalBasic"></div>
+            <div class="result-modal-marks" id="resultModalMarks"></div>
+          </div>
+
+          <div class="result-modal-footer">
+            <button type="button" class="btn btn-primary" id="resultModalOkBtn">
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-config.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/component.js"></script>
+    <script src="../assets/js/admin-profile.js"></script>
+    <script src="../assets/js/results.js"></script>
+  </body>
+</html>

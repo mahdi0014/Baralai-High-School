@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel - Baralai High School</title>
+  </head>
+
+  <body>
+    <p>Redirecting...</p>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-config.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async function () {
+        if (!window.bhsSupabase) {
+          window.location.replace("login.html");
+          return;
+        }
+
+        const { data } = await window.bhsSupabase.auth.getSession();
+
+        if (data && data.session) {
+          window.location.replace("dashboard.html");
+        } else {
+          window.location.replace("login.html");
+        }
+      });
+    </script>
+  </body>
+</html>

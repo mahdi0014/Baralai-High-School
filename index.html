@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baralai High School</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/layout-clean.css" />
+  </head>
+
+  <body>
+    <div id="public-header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Welcome to <br />Baralai High School</h1>
+        <p>Excellence in Education | Building Future Leaders</p>
+        <a href="result.html" class="btn"
+          ><i class="fas fa-search"></i> Check Results</a
+        >
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+      <h2>Why Choose Baralai High School?</h2>
+      <div class="card-container">
+        <div class="card">
+          <i
+            class="fas fa-graduation-cap"
+            style="font-size: 2rem; color: #003366; margin-bottom: 1rem"
+          ></i>
+          <h3>Quality Education</h3>
+          <p>
+            We provide comprehensive education with modern teaching methods and
+            experienced faculty.
+          </p>
+        </div>
+        <div class="card">
+          <i
+            class="fas fa-users"
+            style="font-size: 2rem; color: #003366; margin-bottom: 1rem"
+          ></i>
+          <h3>Expert Teachers</h3>
+          <p>
+            Our dedicated teachers are committed to nurturing students'
+            potential and academic excellence.
+          </p>
+        </div>
+        <div class="card">
+          <i
+            class="fas fa-trophy"
+            style="font-size: 2rem; color: #003366; margin-bottom: 1rem"
+          ></i>
+          <h3>Sports & Activities</h3>
+          <p>
+            We offer various sports and extracurricular activities for holistic
+            student development.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-school-section" id="about">
+      <h2>About Our School</h2>
+      <p class="about-school-subtitle">
+        Baralai High School is dedicated to quality education, discipline, and
+        student success.
+      </p>
+
+      <div class="about-school-grid">
+        <div class="about-school-card">
+          <div class="about-school-icon">
+            <i class="fas fa-school"></i>
+          </div>
+          <h3>Our Institution</h3>
+          <p>
+            Baralai High School is a prestigious educational institution
+            committed to providing quality education and academic excellence.
+          </p>
+        </div>
+
+        <div class="about-school-card">
+          <div class="about-school-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3>Our Vision</h3>
+          <p>
+            We aim to nurture young minds with knowledge, values, discipline,
+            and confidence for a successful future.
+          </p>
+        </div>
+
+        <div class="about-school-card">
+          <div class="about-school-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <h3>Modern Learning</h3>
+          <p>
+            We combine traditional values with modern teaching methods to create
+            a supportive and effective learning environment.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section class="section public-people-section" id="teachers">
+      <h2>Our Teachers</h2>
+      <p class="public-people-subtitle">
+        Meet our dedicated teachers who guide students with care and excellence.
+      </p>
+
+      <div class="public-people-grid" id="publicTeachersGrid">
+        <div class="public-people-empty">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <h3>No Teacher Found</h3>
+          <p>No teacher information is available right now.</p>
+        </div>
+      </div>
+
+      <div class="public-people-btn-wrap">
+        <button class="btn" id="showAllTeachersBtn">See All Teachers</button>
+      </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section class="section public-people-section" id="staff">
+      <h2>Our Staff</h2>
+      <p class="public-people-subtitle">
+        Meet our supportive staff members who help run the school smoothly.
+      </p>
+
+      <div class="public-people-grid" id="publicStaffGrid">
+        <div class="public-people-empty">
+          <i class="fas fa-users"></i>
+          <h3>No Staff Found</h3>
+          <p>No staff information is available right now.</p>
+        </div>
+      </div>
+
+      <div class="public-people-btn-wrap">
+        <button class="btn" id="showAllStaffBtn">See All Staff</button>
+      </div>
+    </section>
+
+    <!-- Teacher / Staff Details Popup -->
+    <div class="public-people-modal" id="publicPeopleModal">
+      <div class="public-people-modal-content">
+        <div class="public-people-modal-header">
+          <h3 id="publicPeopleModalTitle">Details</h3>
+
+          <button class="public-people-modal-close" id="closePublicPeopleModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="public-people-modal-body" id="publicPeopleModalBody"></div>
+      </div>
+    </div>
+
+    <section class="section home-notice-section" id="notices">
+      <h2>Latest Notices</h2>
+      <p class="home-notice-subtitle">
+        Stay updated with the latest school announcements and important notices.
+      </p>
+
+      <div class="home-notice-grid" id="homeNoticeGrid">
+        <div class="home-notice-empty">
+          <i class="fas fa-bullhorn"></i>
+          <h3>No Notice Found</h3>
+          <p>No published notice is available right now.</p>
+        </div>
+      </div>
+
+      <div class="home-notice-btn-wrap">
+        <button class="btn" id="showAllHomeNoticesBtn">See All Notices</button>
+      </div>
+    </section>
+
+    <div class="home-notice-modal" id="homeNoticeModal">
+      <div class="home-notice-modal-content">
+        <div class="home-notice-modal-header">
+          <h3 id="homeModalNoticeTitle">Notice Title</h3>
+
+          <button class="home-notice-modal-close" id="closeHomeNoticeModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="home-notice-modal-body">
+          <div class="home-notice-modal-meta">
+            <span id="homeModalNoticeCategory">
+              <i class="fas fa-folder"></i>
+              Category
+            </span>
+
+            <span id="homeModalNoticeDate">
+              <i class="fas fa-calendar-alt"></i>
+              Date
+            </span>
+
+            <span id="homeModalNoticePriority">
+              <i class="fas fa-star"></i>
+              Priority
+            </span>
+          </div>
+
+          <p id="homeModalNoticeDescription">
+            Notice description will show here.
+          </p>
+
+          <div class="home-notice-attachment" id="homeModalAttachmentBox">
+            <a href="#" id="homeModalAttachment" target="_blank">
+              <i class="fas fa-paperclip"></i>
+              View Attached File
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Links Section -->
+    <section class="section" id="quick-links">
+      <h2>Quick Links</h2>
+      <div class="card-container">
+        <div class="card">
+          <i
+            class="fas fa-bullhorn"
+            style="font-size: 2rem; color: #003366; margin-bottom: 1rem"
+          ></i>
+          <h3>Latest Notices</h3>
+          <p>
+            Stay updated with the latest school announcements and important
+            notices.
+          </p>
+          <a href="#notices" class="btn" style="margin-top: 1rem"
+            >View Notices</a
+          >
+        </div>
+        <div class="card">
+          <i
+            class="fas fa-file-alt"
+            style="font-size: 2rem; color: #003366; margin-bottom: 1rem"
+          ></i>
+          <h3>Admission Open</h3>
+          <p>
+            Admissions are now open for the upcoming academic year. Apply now!
+          </p>
+          <a href="#admissions" class="btn" style="margin-top: 1rem"
+            >Apply Now</a
+          >
+        </div>
+        <div class="card">
+          <i
+            class="fas fa-calendar"
+            style="font-size: 2rem; color: #003366; margin-bottom: 1rem"
+          ></i>
+          <h3>Academic Calendar</h3>
+          <p>
+            Check important dates, holidays, and school events throughout the
+            year.
+          </p>
+          <a href="#academic-calender" class="btn" style="margin-top: 1rem"
+            >View Calendar</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="section" id="contact">
+      <h2>Contact Information</h2>
+      <div class="card-container">
+        <div class="card">
+          <i
+            class="fas fa-map-marker-alt"
+            style="font-size: 2rem; color: #003366; margin-bottom: 1rem"
+          ></i>
+          <h3>Location</h3>
+          <p>Baralai High School<br />Baralai, Bangladesh</p>
+        </div>
+        <div class="card">
+          <i
+            class="fas fa-phone"
+            style="font-size: 2rem; color: #003366; margin-bottom: 1rem"
+          ></i>
+          <h3>Phone</h3>
+          <p>+880 XXXX-XXXXXX<br />+880 XXXX-XXXXXX</p>
+        </div>
+        <div class="card">
+          <i
+            class="fas fa-envelope"
+            style="font-size: 2rem; color: #003366; margin-bottom: 1rem"
+          ></i>
+          <h3>Email</h3>
+          <p>info@baralaischool.edu<br />admin@baralaischool.edu</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase-config.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/component.js"></script>
+  </body>
+</html>

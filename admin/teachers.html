@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teachers & Staff Management - Baralai High School</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../assets/css/components.css" />
+    <link rel="stylesheet" href="../assets/css/teachers.css" />
+    <link rel="stylesheet" href="../assets/css/layout-clean.css" />
+  </head>
+
+  <body class="admin-page">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content" id="appBody">
+      <div id="admin-header-container"></div>
+
+      <section class="page-container">
+        <div class="tm-page-card">
+          <div class="tm-header">
+            <div>
+              <h2>Teachers & Staff Management</h2>
+              <p>Manage teachers and staff information from admin panel.</p>
+            </div>
+
+            <button
+              type="button"
+              class="tm-btn tm-btn-primary"
+              id="refreshPageBtn"
+            >
+              <i class="fas fa-sync-alt"></i>
+              Refresh
+            </button>
+          </div>
+
+          <div class="tm-dashboard">
+            <div class="tm-stat-card">
+              <i class="fas fa-chalkboard-teacher"></i>
+              <div>
+                <h3 id="totalTeachers">0</h3>
+                <p>Active Teachers</p>
+              </div>
+            </div>
+
+            <div class="tm-stat-card">
+              <i class="fas fa-users"></i>
+              <div>
+                <h3 id="totalStaff">0</h3>
+                <p>Active Staff</p>
+              </div>
+            </div>
+
+            <div class="tm-stat-card">
+              <i class="fas fa-user-clock"></i>
+              <div>
+                <h3 id="totalRetired">0</h3>
+                <p>Retired</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="tm-subnav">
+            <button
+              type="button"
+              class="tm-tab-btn active"
+              data-target="teachersSection"
+            >
+              <i class="fas fa-chalkboard-teacher"></i>
+              Teachers
+            </button>
+
+            <button type="button" class="tm-tab-btn" data-target="staffSection">
+              <i class="fas fa-users"></i>
+              Staff
+            </button>
+          </div>
+        </div>
+
+        <div class="tm-section active" id="teachersSection">
+          <div class="tm-toolbar-card">
+            <div>
+              <h3>Teachers Section</h3>
+              <p>Add, update, retire and manage teacher records.</p>
+            </div>
+
+            <button
+              type="button"
+              class="tm-btn tm-btn-primary"
+              id="showTeacherFormBtn"
+            >
+              <i class="fas fa-plus-circle"></i>
+              Add Teacher
+            </button>
+          </div>
+
+          <div class="tm-form-card tm-hidden" id="teacherFormCard">
+            <div class="tm-card-title">
+              <h3 id="teacherFormTitle">Add Teacher</h3>
+
+              <button
+                type="button"
+                class="tm-close-btn"
+                id="closeTeacherFormBtn"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
+            <form id="teacherForm">
+              <div class="tm-form-grid">
+                <div>
+                  <label for="teacherImage">Teacher Image</label>
+                  <input type="file" id="teacherImage" accept="image/*" />
+                  <div class="tm-image-preview" id="teacherImagePreview">
+                    <span>No image selected</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="teacherId">Teacher ID</label>
+                  <input type="text" id="teacherId" required />
+                </div>
+
+                <div>
+                  <label for="teacherName">Teacher Name</label>
+                  <input type="text" id="teacherName" required />
+                </div>
+
+                <div>
+                  <label for="teacherPhone">Phone</label>
+                  <input
+                    type="text"
+                    id="teacherPhone"
+                    placeholder="01712345678"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="teacherEmail">Email</label>
+                  <input type="email" id="teacherEmail" />
+                </div>
+
+                <div>
+                  <label for="teacherSubjectSelect">Subject</label>
+                  <select id="teacherSubjectSelect">
+                    <option value="">Select Subject</option>
+                    <option value="Bangla">Bangla</option>
+                    <option value="English">English</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Science">Science</option>
+                    <option value="ICT">ICT</option>
+                    <option value="BGS">BGS</option>
+                    <option value="Religion">Religion</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Physical Education">
+                      Physical Education
+                    </option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="teacherSubjectManual">Manual Subject</label>
+                  <input
+                    type="text"
+                    id="teacherSubjectManual"
+                    placeholder="Write subject if not in list"
+                  />
+                </div>
+
+                <div>
+                  <label for="teacherDesignation">Designation</label>
+                  <input
+                    type="text"
+                    id="teacherDesignation"
+                    placeholder="Example: Assistant Teacher"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="teacherQualification">Qualification</label>
+                  <input
+                    type="text"
+                    id="teacherQualification"
+                    placeholder="Example: M.A, B.Ed"
+                  />
+                </div>
+
+                <div>
+                  <label for="teacherJoiningDate">Joining Date</label>
+                  <input type="date" id="teacherJoiningDate" />
+                </div>
+
+                <div>
+                  <label for="teacherStatus">Status</label>
+                  <select id="teacherStatus">
+                    <option value="Active">Active</option>
+                    <option value="Retired">Retired</option>
+                  </select>
+                </div>
+                <div
+                  class="tm-retired-date-group tm-hidden"
+                  id="teacherRetiredDateGroup"
+                >
+                  <label for="teacherRetiredDate">Retired Date</label>
+                  <input type="date" id="teacherRetiredDate" />
+                </div>
+
+                <div>
+                  <label for="teacherAddress">Address</label>
+                  <textarea id="teacherAddress" rows="3"></textarea>
+                </div>
+              </div>
+
+              <div class="tm-form-actions">
+                <button
+                  type="submit"
+                  class="tm-btn tm-btn-success"
+                  id="saveTeacherBtn"
+                >
+                  <i class="fas fa-save"></i>
+                  Save Teacher
+                </button>
+
+                <button
+                  type="button"
+                  class="tm-btn tm-btn-light"
+                  id="resetTeacherBtn"
+                >
+                  <i class="fas fa-undo"></i>
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="tm-list-card">
+            <div class="tm-list-header">
+              <div>
+                <h3>Active Teachers</h3>
+                <p>Active teachers will be shown here as card list.</p>
+              </div>
+
+              <input
+                type="text"
+                id="teacherSearch"
+                placeholder="Search teacher..."
+              />
+            </div>
+
+            <div class="tm-card-list" id="teacherTableBody"></div>
+          </div>
+
+          <div class="tm-list-card">
+            <div class="tm-list-header">
+              <div>
+                <h3>Retired Teachers</h3>
+                <p>Retired teachers will move here automatically.</p>
+              </div>
+            </div>
+
+            <div
+              class="tm-card-list tm-retired-list"
+              id="retiredTeacherList"
+            ></div>
+          </div>
+        </div>
+
+        <div class="tm-section" id="staffSection">
+          <div class="tm-toolbar-card">
+            <div>
+              <h3>Staff Section</h3>
+              <p>Add, update, retire and manage staff records.</p>
+            </div>
+
+            <button
+              type="button"
+              class="tm-btn tm-btn-primary"
+              id="showStaffFormBtn"
+            >
+              <i class="fas fa-plus-circle"></i>
+              Add Staff
+            </button>
+          </div>
+
+          <div class="tm-form-card tm-hidden" id="staffFormCard">
+            <div class="tm-card-title">
+              <h3 id="staffFormTitle">Add Staff</h3>
+
+              <button type="button" class="tm-close-btn" id="closeStaffFormBtn">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
+            <form id="staffForm">
+              <div class="tm-form-grid">
+                <div>
+                  <label for="staffImage">Staff Image</label>
+                  <input type="file" id="staffImage" accept="image/*" />
+                  <div class="tm-image-preview" id="staffImagePreview">
+                    <span>No image selected</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="staffId">Staff ID</label>
+                  <input type="text" id="staffId" required />
+                </div>
+
+                <div>
+                  <label for="staffName">Staff Name</label>
+                  <input type="text" id="staffName" required />
+                </div>
+
+                <div>
+                  <label for="staffPhone">Phone</label>
+                  <input
+                    type="text"
+                    id="staffPhone"
+                    placeholder="01712345678"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="staffEmail">Email</label>
+                  <input type="email" id="staffEmail" />
+                </div>
+
+                <div>
+                  <label for="staffDesignation">Designation</label>
+                  <input
+                    type="text"
+                    id="staffDesignation"
+                    placeholder="Example: Office Assistant"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="staffQualification">Qualification</label>
+                  <input type="text" id="staffQualification" />
+                </div>
+
+                <div>
+                  <label for="staffJoiningDate">Joining Date</label>
+                  <input type="date" id="staffJoiningDate" />
+                </div>
+
+                <div>
+                  <label for="staffStatus">Status</label>
+                  <select id="staffStatus">
+                    <option value="Active">Active</option>
+                    <option value="Retired">Retired</option>
+                  </select>
+                </div>
+
+                <div
+                  class="tm-retired-date-group tm-hidden"
+                  id="staffRetiredDateGroup"
+                >
+                  <label for="staffRetiredDate">Retired Date</label>
+                  <input type="date" id="staffRetiredDate" />
+                </div>
+
+                <div>
+                  <label for="staffAddress">Address</label>
+                  <textarea id="staffAddress" rows="3"></textarea>
+                </div>
+              </div>
+
+              <div class="tm-form-actions">
+                <button
+                  type="submit"
+                  class="tm-btn tm-btn-success"
+                  id="saveStaffBtn"
+                >
+                  <i class="fas fa-save"></i>
+                  Save Staff
+                </button>
+
+                <button
+                  type="button"
+                  class="tm-btn tm-btn-light"
+                  id="resetStaffBtn"
+                >
+                  <i class="fas fa-undo"></i>
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="tm-list-card">
+            <div class="tm-list-header">
+              <div>
+                <h3>Active Staff</h3>
+                <p>Active staff will be shown here as card list.</p>
+              </div>
+
+              <input
+                type="text"
+                id="staffSearch"
+                placeholder="Search staff..."
+              />
+            </div>
+
+            <div class="tm-card-list" id="staffTableBody"></div>
+          </div>
+
+          <div class="tm-list-card">
+            <div class="tm-list-header">
+              <div>
+                <h3>Retired Staff</h3>
+                <p>Retired staff will move here automatically.</p>
+              </div>
+            </div>
+
+            <div
+              class="tm-card-list tm-retired-list"
+              id="retiredStaffList"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="tm-popup-overlay" id="personPopup">
+        <div class="tm-popup-card">
+          <div class="tm-popup-header">
+            <div>
+              <h3 id="popupTitle">Details</h3>
+              <p id="popupSubtitle">Teacher / Staff Information</p>
+            </div>
+
+            <button type="button" class="tm-popup-close" id="popupCloseBtn">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <div class="tm-popup-body" id="popupBody"></div>
+
+          <div class="tm-popup-actions">
+            <button
+              type="button"
+              class="tm-btn tm-btn-light"
+              id="popupCloseActionBtn"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="footer-container"></div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-config.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/component.js"></script>
+    <script src="../assets/js/admin-profile.js"></script>
+    <script src="../assets/js/teachers.js"></script>
+  </body>
+</html>
